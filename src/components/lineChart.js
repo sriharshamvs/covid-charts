@@ -1,11 +1,8 @@
-// import { processData } from "../../lib/process";
 import React from "react";
 import { Line } from "react-chartjs-2";
 
 function mapData(csv_data) {
-  // console.log(csv_data);
-  const values = JSON.parse(csv_data.jsonData);
-  console.log(values);
+  const values = csv_data.data["India"]["data"];
   const data = {
     labels: csv_data.header,
     datasets: [
@@ -13,11 +10,22 @@ function mapData(csv_data) {
         label: "COVID-19 Dataset",
         fill: false,
         lineTension: 0.1,
-        borderDash: [],
-        borderDashOffset: 0.0,
         backgroundColor: "rgba(75,192,192,0.4)",
         borderColor: "rgba(75,192,192,1)",
-        data: values.India,
+        borderCapStyle: "butt",
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: "miter",
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: values,
       },
     ],
   };
@@ -25,24 +33,11 @@ function mapData(csv_data) {
 }
 
 export default function LineChart(props) {
-  // console.log(props);
   const data = mapData(props.csv_data);
   return (
     <div>
-      <h2>Line Example</h2>
+      <h2>COVID-19 Charts</h2>
       <Line data={data} width={800} height={200} />
     </div>
   );
 }
-
-// export async function getStaticProps() {
-//   const csv_data = await processData();
-//   console.log(csv_data.data);
-//   console.log(csv_data.keys_data);
-//   console.log(csv_data.header);
-//   return {
-//     props: {
-//       csv_data,
-//     },
-//   };
-// }
